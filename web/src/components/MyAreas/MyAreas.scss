@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
+
+.SquareAreaMA {
+  width: 400px;
+  height: 300px;
+  background-color: #d8eefe;
+  border-radius: 5px;
+  border: 2px solid #094067;
+  box-shadow: -6px 6px #90b4ce;
+}
+
+.TitleAM {
+  font-family: "Orbitron";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: #094067;
+}
+
+.DivStatusAM {
+  width: 120px;
+  height: 70px;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.DivServicesAM {
+  width: 120px;
+  height: 130px;
+  padding-left: 20px;
+}
+
+.DivActReactAM {
+  display: flex;
+  padding-left: 20px;
+}
+
+.DivActionAM {
+  width: 120px;
+  height: 100px;
+  padding-right: 40px;
+}
+
+.LineAreaAM {
+  width: 2px;
+  height: 60px;
+  background-color: #094067;
+  margin-top: 10px;
+}
+
+.DivReactionAM {
+  width: 120px;
+  height: 100px;
+  padding-left: 20px;
+}

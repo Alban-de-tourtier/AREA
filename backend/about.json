@@ -1,0 +1,33 @@
+{
+  "client": {
+    "host": "127.0.0.1:8081"
+  },
+  "server": {
+    "current_time": 1531680780,
+    "services": [
+      {
+        "name": "youtube",
+        "actions": [
+          {
+            "name": "new_video_from",
+            "description": "An account posted a video"
+          },
+          {
+            "name": "new_message_inbox",
+            "description": "A new private message is received by the user"
+          },
+          {
+            "name": "new_like",
+            "description": "The user gains a like from one of their messages"
+          }
+        ],
+        "reactions": [
+          {
+            "name": "like_message",
+            "description": "The user likes a message"
+          }
+        ]
+      }
+    ]
+  }
+}
