@@ -5,14 +5,15 @@ import Button from "@suid/material/Button";
 import ArrowForwardIosIcon from "@suid/icons-material/ArrowForwardIos";
 import { createTheme, ThemeProvider } from "@suid/material/styles";
 import { useHistory } from "@gh0st-work/solid-js-router";
+import { NavigateTo } from "../../utils/NaviagteTo";
 
 const theme = createTheme({
   typography: {
     button: {
       fontFamily: "Work sans",
       textTransform: "none",
-      fontSize: "28px",
-      fontWeight: "400px",
+      fontSize: "1.75rem",
+      fontWeight: "25rem",
     },
   },
   palette: {
@@ -27,9 +28,6 @@ const theme = createTheme({
 
 const LinkPage = () => {
   const history = useHistory();
-  const navigateHome = () => {
-    history.push("/home");
-  };
   return (
     <div class="MainDivAP">
       <div class="RectangleAP">
@@ -48,9 +46,9 @@ const LinkPage = () => {
               variant="contained"
               color="primary"
               class="createButton"
-              onClick={() => navigateHome()}
+              onClick={() => NavigateTo("/", history)}
             >
-              <span>Add AREA</span>
+              <span>Manage my AREA</span>
               <ArrowForwardIosIcon />
             </Button>
           </ThemeProvider>

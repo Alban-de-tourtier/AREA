@@ -23,9 +23,6 @@ const RouterAREA = () => (
       <Link to="/client.apk" target="_blank" download>
         Download
       </Link>
-      <Route path={"/home"}>
-        <HomePage />
-      </Route>
       <Route path={"/signin"}>
         <SignInPage />
       </Route>
@@ -35,14 +32,15 @@ const RouterAREA = () => (
       <Route path={"/action"}>
         <ActionPage />
       </Route>
-      <Route path={"/link"}>
+      <Route path={"/services"}>
         <LinkPage />
       </Route>
-      <Route path="404">
+      <Route path="/404">
         <NotFound />
       </Route>
-      <Route components={NotFound} />
-      <DefaultRoute to={"/home"} />
+      <Route path={"/"}>
+        <HomePage />
+      </Route>
     </Routes>
   </Router>
 );

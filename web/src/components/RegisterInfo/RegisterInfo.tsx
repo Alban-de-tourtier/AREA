@@ -1,42 +1,26 @@
 import * as Solid from "solid-js";
-import "./RegisterInfo.scss";
+import styles from "./RegisterInfo.module.scss";
 import Button from "@suid/material/Button";
-import { AiOutlineGoogle } from "solid-icons/ai";
 import ArrowForwardIosIcon from "@suid/icons-material/ArrowForwardIos";
 import { createTheme, ThemeProvider } from "@suid/material/styles";
 import { useHistory } from "@gh0st-work/solid-js-router";
+import { NavigateTo } from "../../utils/NaviagteTo";
 
 const theme = createTheme({
   typography: {
     button: {
       fontFamily: "Work sans",
       textTransform: "none",
-      fontSize: "28px",
-      fontWeight: "400px",
+      fontSize: "1.75rem",
+      fontWeight: "25rem",
     },
   },
   palette: {
     primary: {
       main: "#EF4565",
     },
-  },
-  shape: {
-    borderRadius: 5,
-  },
-});
-
-const google = createTheme({
-  typography: {
-    button: {
-      fontFamily: "Work sans",
-      textTransform: "none",
-      fontSize: "28px",
-      fontWeight: "400px",
-    },
-  },
-  palette: {
-    primary: {
-      main: "#ffffff",
+    secondary: {
+      main: "#FFFFFF",
     },
   },
   shape: {
@@ -47,13 +31,13 @@ const google = createTheme({
 const account = createTheme({
   typography: {
     button: {
-      width: "322px",
-      height: "36px",
+      width: "20.125rem",
+      height: "2.25rem",
       fontFamily: "Work sans",
       textTransform: "none",
-      fontSize: "20px",
+      fontSize: "1.25rem",
       fontWeight: "300",
-      lineHeight: "23px",
+      lineHeight: "1.438rem",
     },
   },
   palette: {
@@ -65,30 +49,27 @@ const account = createTheme({
 
 function RegisterInfo() {
   const history = useHistory();
-  const navigateSignIn = () => {
-    history.push("/signin");
-  };
   return (
-    <div class="firstDiv">
+    <div class={styles.firstDiv}>
       <div>
-        <span class="areaTitle">Area</span>
+        <span class={styles.areaTitle}>Area</span>
       </div>
-      <div class="containerLogin">
-        <span class="loginTitle">Register</span>
+      <div class={styles.containerLogin}>
+        <span class={styles.loginTitle}>Register</span>
       </div>
-      <div class="secondDiv">
-        <div class="accountButton">
+      <div class={styles.secondDiv}>
+        <div class={styles.accountButton}>
           <ThemeProvider theme={account}>
             <Button>Already have an account?</Button>
           </ThemeProvider>
         </div>
-        <div class="containerCreate">
+        <div class={styles.containerCreate}>
           <ThemeProvider theme={theme}>
             <Button
               variant="contained"
               color="primary"
-              class="createButton"
-              onClick={navigateSignIn}
+              class={styles.createButton}
+              onClick={() => NavigateTo("/signin", history)}
             >
               <span>Log in</span>
               <ArrowForwardIosIcon />

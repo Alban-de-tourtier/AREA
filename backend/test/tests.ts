@@ -14,7 +14,7 @@ import { after, before, describe, it } from 'mocha'
 import { connect, connection } from 'mongoose'
 import '../src/app'
 
-import User from '../src/Schemas/User'
+import User from '../src/models/User'
 
 // ─────────────────────────────────────────────────────────────────────────────
 

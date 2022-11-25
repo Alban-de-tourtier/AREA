@@ -1,48 +1,44 @@
-import { Component, createSignal, createMemo } from "solid-js";
-import "./LinkServices.scss";
-import Button from "@suid/material/Button";
-import axios from "axios";
-import { useHistory } from "@gh0st-work/solid-js-router";
+import { createSignal, createEffect } from "solid-js";
+import styles from "./LinkServices.module.scss";
+import { RequestApi } from "../../utils/RequestApi";
+import ButtonLinkServices from "./ButtonLinkServices";
 
-const [valueLink, setLink] = createSignal<string>("");
-
-async function autoYoutube(navigateYt: void): Promise<void> {
-  axios.defaults.withCredentials = true;
-  const response = await axios.post(`http://localhost:8080/authorize/youtube`, {
-    withCredentials: true,
-  });
-  if (response.status == 200) setLink(response.data.authorizationURL);
-  navigateYt;
+interface Services {
+  name: string;
+  _id: string;
 }
 
 const LinkServices = () => {
-  const history = useHistory();
-  const navigateYt = createMemo((): void => {
-    history.push(valueLink());
+  const [ServicesValue, setServicesValue] = createSignal<[Services]>();
+
+  async function getServices() {
+    try {
+      const response = await RequestApi("services?projection=name", "get");
+      setServicesValue(response.data.services);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  createEffect(() => {
+    getServices();
   });
   return (
-    <div class="RectangleCS">
-      <div class="TitleCS">
+    <div class={styles.Rectangle}>
+      <div class={styles.Title}>
         <div>
-          <span class="TitleChooseServiceCS">Our services</span>
+          <span class={styles.TitleChooseService}>Our services</span>
         </div>
         <div>
-          <span class="TitleTriggerCS">
+          <span class={styles.TitleTrigger}>
             Link your different account to have a global access
           </span>
         </div>
       </div>
-      <div class="DivActionCS">
-        <div class="WipServiceCS">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => autoYoutube(navigateYt())}
-          >
-            <span>Youtube</span>
-          </Button>
-          {/* <span>Available service</span> */}
-        </div>
+      <div class={styles.DivAction}>
+        {ServicesValue()?.map((services) => (
+          <ButtonLinkServices name={services.name} />
+        ))}
       </div>
     </div>
   );

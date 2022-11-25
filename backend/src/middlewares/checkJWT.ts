@@ -6,12 +6,10 @@
 
 // ─── Imports ─────────────────────────────────────────────────────────────────
 
-import { NextFunction, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { jwtVerify } from 'jose'
 import { Types } from 'mongoose'
-import ExpressError from '../Classes/ExpressError'
-
-import Request from '../Interfaces/IEnrichedRequest'
+import ExpressError from '../classes/ExpressError'
 
 // ─────────────────────────────────────────────────────────────────────────────
 

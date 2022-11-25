@@ -6,11 +6,11 @@
 
 // ─── Imports ─────────────────────────────────────────────────────────────────
 
-import { NextFunction, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { SignJWT } from 'jose'
 
-import ExpressError from '../Classes/ExpressError'
-import Request from '../Interfaces/IEnrichedRequest'
+import ExpressError from '../classes/ExpressError'
+import { xDays, xDaysLater } from '../misc/days'
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -19,13 +19,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     // ─── Check Requirements ───────────────────────────────────────
 
     if (!req.user?.id) throw new ExpressError(400, 'User ID missing.')
-
-    // ─── Misc ─────────────────────────────────────────────────────
-
-    const thirtyDays: number = 30 * (24 * 60 * 60 * 1000)
-    const thirtyDaysLater: Function = (): Date => {
-      return new Date(Date.now() + thirtyDays)
-    }
 
     // ─── Create A JWT ─────────────────────────────────────────────
 
@@ -37,12 +30,14 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     // ─── Add The JWT To A Cookie ──────────────────────────────────
 
-    res.cookie('jwt', jwt, {
-      expires: thirtyDaysLater(),
-      httpOnly: true,
-      maxAge: thirtyDays,
-      sameSite: 'lax'
-    })
+    if (req.device.type === 'desktop') {
+      res.cookie('jwt', jwt, {
+        expires: xDaysLater(30),
+        httpOnly: true,
+        maxAge: xDays(30),
+        sameSite: 'lax'
+      })
+    }
 
     // ─── Respond ──────────────────────────────────────────────────
 
@@ -52,7 +47,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     }
     res.status(req.user.newUser ? 201 : 200).send({
       success: true,
-      needLogin: false
+      needLogin: false,
+      jwt: req.device.type !== 'desktop' ? jwt : undefined
     })
 
     // ──────────────────────────────────────────────────────────────

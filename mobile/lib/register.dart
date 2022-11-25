@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:area/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -80,13 +79,16 @@ class RegisterRoute extends StatelessWidget {
                       'password': (RegpasswordController.text),
                     };
                     final response = await http.post(
-                        Uri.parse('http://localhost:8080/auth/register'),
+                        Uri.parse('http://$myIP:8080/v2/auth/register'),
                         body: body);
+                    print(response.body);
                     if (response.statusCode == 200) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Dashboard()),
+                            builder: (context) => const Dashboard(
+                                  title: 'AREA',
+                                )),
                       );
                     } else {
                       showDialog(

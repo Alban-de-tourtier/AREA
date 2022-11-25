@@ -1,20 +1,18 @@
 import { Component } from "solid-js";
-import "./AddArea.scss";
+import styles from "./AddArea.module.scss";
 import ControlPointIcon from "@suid/icons-material/ControlPoint";
 import { useHistory } from "@gh0st-work/solid-js-router";
+import { NavigateTo } from "../../utils/NaviagteTo";
 
 const AddArea = () => {
   const history = useHistory();
-  const navigateAction = () => {
-    history.push("/action");
-  };
   return (
-    <div class="SquareAddAD" onClick={navigateAction}>
-      <div class="DivIconAD">
-        <ControlPointIcon class="IconAD" sx={{ fontSize: "128px" }} />
+    <div class={styles.SquareAdd} onClick={() => NavigateTo("/action", history)}>
+      <div class={styles.DivIcon}>
+        <ControlPointIcon class={styles.Icon} sx={{ fontSize: "8rem" }} />
       </div>
-      <div class="DivTitleAD">
-        <span class="TitleNewAD">Add a new AREA</span>
+      <div class={styles.DivIcon}>
+        <span class={styles.TitleNew}>Add a new AREA</span>
       </div>
     </div>
   );

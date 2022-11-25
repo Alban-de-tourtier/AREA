@@ -3,17 +3,18 @@ import Button from "@suid/material/Button";
 import ArrowForwardIosIcon from "@suid/icons-material/ArrowForwardIos";
 import { createTheme, ThemeProvider } from "@suid/material/styles";
 import MyAreas from "../../components/MyAreas/MyAreas";
-import AddArea from "../../components/AddArea/AddArea";
 import "./HomePage.scss";
+import { RequestApi } from "../../utils/RequestApi";
 import { useHistory } from "@gh0st-work/solid-js-router";
+import { NavigateTo } from "../../utils/NaviagteTo";
 
 const theme = createTheme({
   typography: {
     button: {
       fontFamily: "Work sans",
       textTransform: "none",
-      fontSize: "28px",
-      fontWeight: "400px",
+      fontSize: "1.75rem",
+      fontWeight: "25rem",
     },
   },
   palette: {
@@ -29,14 +30,12 @@ const theme = createTheme({
 const HomePage = () => {
   document.body.style.backgroundColor = "#ffffff";
   const history = useHistory();
-  const navigateLink = (): void => {
-    history.push("/link");
-  };
+  async function LogOutRoute() {
+    const response = await RequestApi("auth/logout", "post");
+    if (response.status == 200) NavigateTo("/signin", history);
+  }
   return (
     <div class="DivHomeHM">
-      <div class="DivAddHM">
-        <AddArea />
-      </div>
       <div class="DivAddHM">
         <MyAreas />
       </div>
@@ -53,7 +52,7 @@ const HomePage = () => {
               variant="contained"
               color="primary"
               class="LinkButtonH"
-              onClick={() => navigateLink()}
+              onClick={() => NavigateTo("/services", history)}
             >
               <span>Link your accounts</span>
               <ArrowForwardIosIcon />
@@ -62,7 +61,12 @@ const HomePage = () => {
         </div>
         <div>
           <ThemeProvider theme={theme}>
-            <Button variant="contained" color="primary" class="CreateButtonH">
+            <Button
+              variant="contained"
+              color="primary"
+              class="CreateButtonH"
+              onClick={() => LogOutRoute()}
+            >
               <span>Sign out</span>
               <ArrowForwardIosIcon />
             </Button>
